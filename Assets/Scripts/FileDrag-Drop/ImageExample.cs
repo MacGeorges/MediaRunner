@@ -2,66 +2,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using B83.Win32;
-using UnityEngine.Video;
 
 
 public class ImageExample : MonoBehaviour
 {
     Texture2D[] textures = new Texture2D[6];
-    DropInfo dropInfo;
-
-    [SerializeField]
-    private SupportedFiles supportedFiles;
-
-    struct DropInfo
+    DropInfo dropInfo = null;
+    class DropInfo
     {
         public string file;
         public Vector2 pos;
     }
-
     void OnEnable ()
     {
         UnityDragAndDropHook.InstallHook();
         UnityDragAndDropHook.OnDroppedFiles += OnFiles;
 
     }
-
     void OnDisable()
     {
         UnityDragAndDropHook.UninstallHook();
     }
 
-    private void OnFiles(List<string> aFiles, POINT aPos)
+    void OnFiles(List<string> aFiles, POINT aPos)
     {
         string file = "";
-
         // scan through dropped files and filter out supported image types
         foreach(var f in aFiles)
         {
             var fi = new System.IO.FileInfo(f);
             var ext = fi.Extension.ToLower();
-
-            if (supportedFiles.supportedFiles.Contains(ext))
+            if (ext == ".png" || ext == ".jpg" || ext == ".jpeg")
             {
                 file = f;
                 break;
             }
         }
-
         // If the user dropped a supported file, create a DropInfo
         if (file != "")
         {
-            dropInfo = new DropInfo
+            var info = new DropInfo
             {
                 file = file,
                 pos = new Vector2(aPos.x, aPos.y)
             };
+            dropInfo = info;
         }
     }
 
-    private void LoadImage(int aIndex, DropInfo aInfo)
+    void LoadImage(int aIndex, DropInfo aInfo)
     {
-        if (aInfo.file == null)
+        if (aInfo == null)
             return;
         // get the GUI rect of the last Label / box
         var rect = GUILayoutUtility.GetLastRect();
@@ -79,16 +70,13 @@ public class ImageExample : MonoBehaviour
 
     private void OnGUI()
     {
-        DropInfo tmp = new();
-
-        if (Event.current.type == EventType.Repaint && dropInfo.file != null)
+        DropInfo tmp = null;
+        if (Event.current.type == EventType.Repaint && dropInfo!= null)
         {
             tmp = dropInfo;
-            dropInfo.file = null;
+            dropInfo = null;
         }
-
         GUILayout.BeginHorizontal();
-
         for (int i = 0; i < 3; i++)
         {
             if (textures[i] != null)
@@ -97,10 +85,8 @@ public class ImageExample : MonoBehaviour
                 GUILayout.Box("Drag image here", GUILayout.Width(200), GUILayout.Height(200));
             LoadImage(i, tmp);
         }
-
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-
         for (int i = 3; i < 6; i++)
         {
             if (textures[i] != null)
@@ -109,7 +95,6 @@ public class ImageExample : MonoBehaviour
                 GUILayout.Box("Drag image here", GUILayout.Width(200), GUILayout.Height(200));
             LoadImage(i, tmp);
         }
-
         GUILayout.EndHorizontal();
     }
 }

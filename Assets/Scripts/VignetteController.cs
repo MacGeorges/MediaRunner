@@ -51,18 +51,26 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
             case DataType.None:
             case DataType.NDI:
             case DataType.Video:
-            case DataType.Audio:
                 break;
             case DataType.Image:
                 SetSprite(Importer.Instance.imageImporter.ImportImage(vignetteData.dataPath));
                 break;
+            case DataType.Audio:
+                Importer.Instance.audioImporter.ImportAudio(vignetteData.dataPath, SetAudioClip);
+                break ;
         }
     }
 
-    public void SetSprite(Sprite newSprite)
+    private void SetSprite(Sprite newSprite)
     {
         sprite = newSprite;
         image.sprite = sprite;
+    }
+
+    private void SetAudioClip(AudioClip newAudioClip)
+    {
+        audioClip = newAudioClip;
+        image.sprite = null;
     }
 
     public void OnVignetteClicked()

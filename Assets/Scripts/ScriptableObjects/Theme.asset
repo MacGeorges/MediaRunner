@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3038f9e0f1dd3b040ac99aa47053d62b, type: 3}
+  m_Name: Theme
+  m_EditorClassIdentifier: 
+  DefaultVignette: {fileID: 21300000, guid: fa767a6039288bd44943b5387949aef4, type: 3}
+  VideoVignette: {fileID: 21300000, guid: 04c83ec2d616ca24fb9618108a7fc620, type: 3}
+  AudioVignette: {fileID: 21300000, guid: ad4dc625324bedb46a3aa77319360522, type: 3}
+  NDIVignette: {fileID: 21300000, guid: 86e310ebff2ea974e8295e2c99e368f3, type: 3}

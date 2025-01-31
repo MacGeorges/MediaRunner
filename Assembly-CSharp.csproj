@@ -62,19 +62,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Importer\AudioImporter.cs" />
+    <Compile Include="Assets\Scripts\Managers\PresentationManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\VignetteController.cs" />
+    <Compile Include="Assets\Scripts\Managers\VignettesManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\ScreenManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\Importer\VideoImporter.cs" />
-    <Compile Include="Assets\Scripts\ScreenManager.cs" />
-    <Compile Include="Assets\Scripts\VignetteController.cs" />
-    <Compile Include="Assets\Scripts\TopBarController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\ImageInspectorController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\NDIInspectorController.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\FileDragAndDropManager.cs" />
     <Compile Include="Assets\Scripts\Importer\ImageImporter.cs" />
+    <Compile Include="Assets\Scripts\Controllers\RowController.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\B83.Win32.cs" />
-    <Compile Include="Assets\Scripts\VignettesManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\InspectorController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\VideoInspectorController.cs" />
     <Compile Include="Assets\Scripts\Importer\Importer.cs" />
+    <Compile Include="Assets\Scripts\Controllers\TopBarController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\VisualElementInspectorPanel.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Theme.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SupportedFiles.cs" />
-    <Compile Include="Assets\Scripts\PresentationManager.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\ImageExample.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\AudioInspectorController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\Vector3UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

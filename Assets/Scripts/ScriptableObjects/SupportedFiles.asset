@@ -16,10 +16,33 @@ MonoBehaviour:
   - .png
   - .jpg
   - .jpeg
+  - .bmp
+  - .tif
+  - .tga
+  - .psd
+  - .webp
   supportedVideoFiles:
-  - .mp4
+  - .asf
+  - .avi
+  - .dv
+  - .m4v
   - .mov
+  - .mp4
+  - .mpg
+  - .mpeg
+  - .ogv
+  - .vp8
+  - .webm
+  - .wmv
   supportedAudioFiles:
-  - .wave
   - .mp3
   - .ogg
+  - .wav
+  - .wave
+  - .flac
+  - .aif
+  - .aiff
+  - .mod
+  - .it
+  - .s3m
+  - .xm

@@ -83,7 +83,7 @@ public class Importer : MonoBehaviour
                 importType = DataType.Audio;
             }
 
-            VignettesManager.instance.currentVignette?.SetResource(importType, fi.FullName);
+            VignettesManager.Instance.HoveredVignette?.SetResource(importType, fi.FullName);
         }
     }
 }

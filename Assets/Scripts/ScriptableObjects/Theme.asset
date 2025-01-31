@@ -16,3 +16,6 @@ MonoBehaviour:
   VideoVignette: {fileID: 21300000, guid: 04c83ec2d616ca24fb9618108a7fc620, type: 3}
   AudioVignette: {fileID: 21300000, guid: ad4dc625324bedb46a3aa77319360522, type: 3}
   NDIVignette: {fileID: 21300000, guid: 86e310ebff2ea974e8295e2c99e368f3, type: 3}
+  Play: {fileID: 21300000, guid: 0d2ce82353d2ab84bbd7c30f1e34a378, type: 3}
+  Pause: {fileID: 21300000, guid: 225578d4e3a96384784f1471aa450459, type: 3}
+  Stop: {fileID: 21300000, guid: 9c42963b7a0561443acb06c67cc714ec, type: 3}

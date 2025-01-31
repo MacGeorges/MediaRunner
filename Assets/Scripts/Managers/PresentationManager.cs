@@ -50,6 +50,13 @@ public class PresentationManager : MonoBehaviour
         ClearPresentation();
         video.gameObject.SetActive(true);
         videoPlayer.url = videoPath;
+        videoPlayer.playOnAwake = false;
+        videoPlayer.prepareCompleted += OnPrepareCompleted;
+        videoPlayer.Prepare();
+    }
+
+    private void OnPrepareCompleted(VideoPlayer vp)
+    {
         videoPlayer.Play();
     }
 

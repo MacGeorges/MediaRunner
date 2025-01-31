@@ -10,6 +10,17 @@ public class VideoInspectorController : VisualElementInspectorPanel
     private Toggle looping;
     [SerializeField]
     private Slider progress;
+    [SerializeField]
+    private Slider playSpeed;
+    [SerializeField]
+    private TMP_Text playSpeedValue;
+
+    [SerializeField]
+    private Image playPauseIcon;
+    [SerializeField]
+    private Image stopIcon;
+
+    private bool isPlaying;
 
     private void Start()
     {
@@ -18,6 +29,7 @@ public class VideoInspectorController : VisualElementInspectorPanel
 
         looping.onValueChanged.AddListener(OnLoopingChanged);
         progress.onValueChanged.AddListener(OnProgressChanged);
+        playSpeed.onValueChanged.AddListener(OnPlaySpeedChanged);
     }
 
     private void Update()
@@ -31,8 +43,40 @@ public class VideoInspectorController : VisualElementInspectorPanel
         PresentationManager.Instance.videoPlayer.time = newTime;
     }
 
+    private void OnPlaySpeedChanged(float newSpeed)
+    {
+        PresentationManager.Instance.videoPlayer.playbackSpeed = newSpeed;
+        playSpeedValue.text = "x" + newSpeed;
+    }
+
     private void OnLoopingChanged(bool newLoopingValue)
     {
         PresentationManager.Instance.videoPlayer.isLooping = newLoopingValue;
+    }
+
+    public void PlayPauseButtonPressed()
+    {
+        if(isPlaying)
+        {
+            PresentationManager.Instance.videoPlayer.Pause();
+            playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Play;
+            isPlaying = false;
+        }
+        else
+        {
+            PresentationManager.Instance.videoPlayer.Play();
+            playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Pause;
+            isPlaying = true;
+        }
+    }
+
+    public void StopButtonPressed()
+    {
+        PresentationManager.Instance.videoPlayer.Stop();
+    }
+
+    public void ForwardButtonPressed()
+    {
+        PresentationManager.Instance.videoPlayer.StepForward();
     }
 }

@@ -16,8 +16,6 @@ public class VisualElementInspectorPanel : MonoBehaviour
 
     protected void Init()
     {
-        Debug.Log("START", gameObject);
-
         position.Init(targetTransform.transform.localPosition);
         rotation.Init(targetTransform.transform.localRotation.eulerAngles);
         scale.Init(targetTransform.transform.localScale);

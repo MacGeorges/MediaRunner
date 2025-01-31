@@ -14,11 +14,6 @@ public struct DropInfo
 [RequireComponent(typeof(AudioImporter))]
 public class Importer : MonoBehaviour
 {
-    public Vignette currentVignette;
-
-    [SerializeField]
-    private TMP_Text debugText;
-
     [SerializeField]
     private SupportedFiles supportedFiles;
 
@@ -26,7 +21,7 @@ public class Importer : MonoBehaviour
     private VideoImporter videoImporter;
     private AudioImporter audioImporter;
 
-    private void Start()
+    private void Awake()
     {
         imageImporter = GetComponent<ImageImporter>();
         videoImporter = GetComponent<VideoImporter>();
@@ -57,8 +52,6 @@ public class Importer : MonoBehaviour
                 file = f,
                 pos = new Vector2(aPos.x, aPos.y)
             };
-
-            debugText.text = fi.FullName;
 
             if (supportedFiles.supportedImageFiles.Contains(ext))
             {

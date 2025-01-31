@@ -10,9 +10,8 @@ public class ImageImporter : MonoBehaviour
 {
     public void ImportImage(string path, DropInfo dropInfo)
     {
-
+        VignettesManager.instance.currentVignette?.SetSprite(LoadSprite(dropInfo));
     }
-
 
     public Sprite LoadSprite(DropInfo dropInfo)
     {

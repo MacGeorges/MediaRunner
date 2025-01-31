@@ -64,14 +64,16 @@
     <Compile Include="Assets\Scripts\Importer\AudioImporter.cs" />
     <Compile Include="Assets\Scripts\Importer\VideoImporter.cs" />
     <Compile Include="Assets\Scripts\ScreenManager.cs" />
+    <Compile Include="Assets\Scripts\VignetteController.cs" />
     <Compile Include="Assets\Scripts\TopBarController.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\FileDragAndDropManager.cs" />
     <Compile Include="Assets\Scripts\Importer\ImageImporter.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\B83.Win32.cs" />
+    <Compile Include="Assets\Scripts\VignettesManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Importer\Importer.cs" />
-    <Compile Include="Assets\Scripts\Vignette.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SupportedFiles.cs" />
+    <Compile Include="Assets\Scripts\PresentationManager.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\ImageExample.cs" />
   </ItemGroup>
   <ItemGroup>

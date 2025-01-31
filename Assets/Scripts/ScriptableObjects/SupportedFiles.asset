@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1908b7ee7bcfbf943858348dedcd5ef1, type: 3}
   m_Name: SupportedFiles
   m_EditorClassIdentifier: 
-  supportedFiles:
+  supportedImageFiles:
+  - .png
   - .jpg
   - .jpeg
-  - .png
+  supportedVideoFiles:
+  - .mp4
+  - .mov
+  supportedAudioFiles:
+  - .wave
+  - .mp3

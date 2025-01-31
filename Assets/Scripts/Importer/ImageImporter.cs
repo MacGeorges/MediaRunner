@@ -8,6 +8,18 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class ImageImporter : MonoBehaviour
 {
+    public Sprite ImportImage(string path)
+    {
+        if (string.IsNullOrEmpty(path))
+            return null;
+
+        var data = System.IO.File.ReadAllBytes(path);
+        var tex = new Texture2D(1, 1);
+        tex.LoadImage(data);
+
+        return Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+    }
+
     public void ImportImage(string path, DropInfo dropInfo)
     {
         VignettesManager.instance.currentVignette?.SetSprite(LoadSprite(dropInfo));

@@ -9,6 +9,15 @@ public struct DropInfo
     public Vector2 pos;
 }
 
+public enum DataType
+{
+    None = 0,
+    Image = 1,
+    Video = 2,
+    Audio = 3,
+    NDI = 4
+}
+
 [RequireComponent(typeof(ImageImporter))]
 [RequireComponent(typeof(VideoImporter))]
 [RequireComponent(typeof(AudioImporter))]
@@ -17,12 +26,16 @@ public class Importer : MonoBehaviour
     [SerializeField]
     private SupportedFiles supportedFiles;
 
-    private ImageImporter imageImporter;
-    private VideoImporter videoImporter;
-    private AudioImporter audioImporter;
+    public ImageImporter imageImporter { get; private set; }
+    public VideoImporter videoImporter { get; private set; }
+    public AudioImporter audioImporter { get; private set; }
+
+    public static Importer Instance;
 
     private void Awake()
     {
+        Instance = this;
+
         imageImporter = GetComponent<ImageImporter>();
         videoImporter = GetComponent<VideoImporter>();
         audioImporter = GetComponent<AudioImporter>();
@@ -53,20 +66,24 @@ public class Importer : MonoBehaviour
                 pos = new Vector2(aPos.x, aPos.y)
             };
 
+            DataType importType = DataType.None;
+
             if (supportedFiles.supportedImageFiles.Contains(ext))
             {
-                imageImporter.ImportImage(fi.FullName, dropInfo);
+                importType = DataType.Image;
             }
 
             if (supportedFiles.supportedVideoFiles.Contains(ext))
             {
-                videoImporter.ImportVideo(fi.FullName);
+                importType = DataType.Video;
             }
 
             if (supportedFiles.supportedAudioFiles.Contains(ext))
             {
-                audioImporter.ImportAudio(fi.FullName);
+                importType = DataType.Audio;
             }
+
+            VignettesManager.instance.currentVignette?.SetResource(importType, fi.FullName);
         }
     }
 }

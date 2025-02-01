@@ -69,12 +69,14 @@
     <Compile Include="Assets\Scripts\Managers\ThemeManager.cs" />
     <Compile Include="Assets\Scripts\Importer\VideoImporter.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\ImageInspectorController.cs" />
+    <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\NDIInspectorController.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\FileDragAndDropManager.cs" />
     <Compile Include="Assets\Scripts\Importer\ImageImporter.cs" />
     <Compile Include="Assets\Scripts\Controllers\RowController.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\B83.Win32.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\VignetteDisplayController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\InspectorController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\VideoInspectorController.cs" />
@@ -83,7 +85,10 @@
     <Compile Include="Assets\Scripts\Controllers\Inspector\VisualElementInspectorPanel.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Theme.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SupportedFiles.cs" />
+    <Compile Include="Assets\Scripts\StructsEnums.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Inspector\InspectorComponent.cs" />
     <Compile Include="Assets\Scripts\FileDrag-Drop\ImageExample.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Layout.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\AudioInspectorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Inspector\Vector3UIElement.cs" />
   </ItemGroup>

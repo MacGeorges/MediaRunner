@@ -8,23 +8,29 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField]
     private Image image;
 
-    public VignetteData vignetteData
-    {
-        get;
-        private set;
-    }
+    [field: SerializeField]
+    public VignetteDisplayController display
+    { get; private set; }
 
-    private Sprite sprite;
-    private AudioClip audioClip;
+    [field: SerializeField] //Displayed for debug
+    public VignetteData vignetteData { get; private set; }
+
+    public Sprite sprite { get; private set; }
+    public AudioClip audioClip { get; private set; }
 
     private void Awake()
     {
         sprite = image.sprite;
     }
 
-    public void Initialize(VignetteData newVignetteData)
+    public void Initialize(VignetteData newVignetteData, RenderTexture renderTexture, VignetteDisplayController newDisplay)
     {
         vignetteData = newVignetteData;
+        display = newDisplay;
+
+        display.Initialize(vignetteData, renderTexture);
+
+        DisplayResource();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -37,18 +43,7 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
         VignettesManager.Instance.HoveredVignette = null;
     }
 
-    public void SetResource(DataType dataType, string path)
-    {
-        vignetteData = new VignetteData()
-        {
-            mode = dataType,
-            dataPath = path
-        };
-
-        DisplayResource();
-    }
-
-    private void DisplayResource()
+    public void DisplayResource()
     {
         switch (vignetteData.mode)
         {
@@ -100,25 +95,17 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
         image.sprite = ThemeManager.Instance.GetTheme().NDIVignette;
     }
 
-
     public void OnVignetteClicked()
     {
-        VignettesManager.Instance.SetSelectedVignette(this);
-
-        switch (vignetteData.mode)
+        if (VignettesManager.Instance.SelectedVignette == this)
         {
-            case DataType.None:
-            case DataType.NDI:
-                break;
-            case DataType.Image:
-                PresentationManager.Instance.DisplayImage(sprite);
-                break;
-            case DataType.Video:
-                PresentationManager.Instance.DisplayVideo(vignetteData.dataPath);
-                break;
-            case DataType.Audio:
-                PresentationManager.Instance.PlayAudio(audioClip);
-                break;
+            display.Display(false, vignetteData.transitionSpeed);
+            VignettesManager.Instance.SetSelectedVignette(null);
         }
+        else
+        {
+            VignettesManager.Instance.SetSelectedVignette(this);
+        }
+        PresentationManager.Instance.DisplaySelectedVignette();
     }
 }

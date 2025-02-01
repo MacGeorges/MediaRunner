@@ -37,6 +37,9 @@ public class InspectorController : MonoBehaviour
     private void DisplayVignetteInfo(VignetteController vignette)
     {
         ClearPanels();
+
+        if (!vignette) { return; }
+
         vignetteType.text = vignette.vignetteData.mode.ToString();
         vignetteName.text = vignette.vignetteData.dataPath.Split("\\").Last();
 

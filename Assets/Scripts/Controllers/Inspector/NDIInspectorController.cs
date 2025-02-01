@@ -4,7 +4,7 @@ public class NDIInspectorController : VisualElementInspectorPanel
 {
     private void Start()
     {
-        targetTransform = PresentationManager.Instance.video.transform;
+        //targetTransform = PresentationManager.Instance.video.transform;
         base.Init();
     }
 }

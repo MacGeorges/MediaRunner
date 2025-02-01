@@ -3,8 +3,8 @@ using UnityEngine;
 public class ImageInspectorController : VisualElementInspectorPanel
 {
     private void Start()
-    {
-        targetTransform = PresentationManager.Instance.image.transform;
+    { 
+        targetTransform = VignettesManager.Instance.SelectedVignette.display.transform;
         base.Init();
     }
 }

@@ -3,21 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public struct DropInfo
-{
-    public string file;
-    public Vector2 pos;
-}
-
-public enum DataType
-{
-    None = 0,
-    Image = 1,
-    Video = 2,
-    Audio = 3,
-    NDI = 4
-}
-
 [RequireComponent(typeof(ImageImporter))]
 [RequireComponent(typeof(VideoImporter))]
 [RequireComponent(typeof(AudioImporter))]
@@ -83,7 +68,7 @@ public class Importer : MonoBehaviour
                 importType = DataType.Audio;
             }
 
-            VignettesManager.Instance.HoveredVignette?.SetResource(importType, fi.FullName);
+            VignettesManager.Instance.HoveredVignette?.DisplayResource();
         }
     }
 }

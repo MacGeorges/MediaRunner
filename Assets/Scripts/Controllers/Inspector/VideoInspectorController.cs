@@ -22,9 +22,9 @@ public class VideoInspectorController : VisualElementInspectorPanel
 
     private bool isPlaying;
 
-    private void Start()
+    public void Init()
     {
-        targetTransform = PresentationManager.Instance.video.transform;
+        targetTransform = VignettesManager.Instance.SelectedVignette.display.transform;
         base.Init();
 
         looping.onValueChanged.AddListener(OnLoopingChanged);
@@ -34,37 +34,37 @@ public class VideoInspectorController : VisualElementInspectorPanel
 
     private void Update()
     {
-        progress.maxValue = (float)PresentationManager.Instance.videoPlayer.length;
-        progress.value = (float)PresentationManager.Instance.videoPlayer.time;
+        progress.maxValue = (float)VignettesManager.Instance.SelectedVignette?.display.videoPlayer.length;
+        progress.value = (float)VignettesManager.Instance.SelectedVignette?.display.videoPlayer.time;
     }
 
     private void OnProgressChanged(float newTime)
     {
-        PresentationManager.Instance.videoPlayer.time = newTime;
+        VignettesManager.Instance.SelectedVignette.display.videoPlayer.time = newTime;
     }
 
     private void OnPlaySpeedChanged(float newSpeed)
     {
-        PresentationManager.Instance.videoPlayer.playbackSpeed = newSpeed;
+        VignettesManager.Instance.SelectedVignette.display.videoPlayer.playbackSpeed = newSpeed;
         playSpeedValue.text = "x" + newSpeed;
     }
 
     private void OnLoopingChanged(bool newLoopingValue)
     {
-        PresentationManager.Instance.videoPlayer.isLooping = newLoopingValue;
+        VignettesManager.Instance.SelectedVignette.display.videoPlayer.isLooping = newLoopingValue;
     }
 
     public void PlayPauseButtonPressed()
     {
         if(isPlaying)
         {
-            PresentationManager.Instance.videoPlayer.Pause();
+            VignettesManager.Instance.SelectedVignette.display.videoPlayer.Pause();
             playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Play;
             isPlaying = false;
         }
         else
         {
-            PresentationManager.Instance.videoPlayer.Play();
+            VignettesManager.Instance.SelectedVignette.display.videoPlayer.Play();
             playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Pause;
             isPlaying = true;
         }
@@ -72,11 +72,11 @@ public class VideoInspectorController : VisualElementInspectorPanel
 
     public void StopButtonPressed()
     {
-        PresentationManager.Instance.videoPlayer.Stop();
+        VignettesManager.Instance.SelectedVignette.display.videoPlayer.Stop();
     }
 
     public void ForwardButtonPressed()
     {
-        PresentationManager.Instance.videoPlayer.StepForward();
+        VignettesManager.Instance.SelectedVignette.display.videoPlayer.StepForward();
     }
 }

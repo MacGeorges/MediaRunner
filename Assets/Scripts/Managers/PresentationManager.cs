@@ -1,21 +1,14 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using UnityEngine.Video;
 
-[RequireComponent(typeof(VideoPlayer))]
 [RequireComponent(typeof(AudioSource))]
 public class PresentationManager : MonoBehaviour
 {
-    [field: SerializeField]
-    public Image image
-    { get; private set; }
-
-    [field: SerializeField]
-    public RawImage video
-    { get; private set; }
-
-    public VideoPlayer videoPlayer
-    { get; private set; }
+    [SerializeField] //Showing for debug
+    private VignetteDisplayController vignetteDisplay;
 
     public AudioSource audioSource
     { get; private set; }
@@ -26,43 +19,62 @@ public class PresentationManager : MonoBehaviour
     {
         Instance = this;
 
-        videoPlayer = GetComponent<VideoPlayer>();
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void ClearPresentation()
+    public void DisplaySelectedVignette()
     {
-        image.gameObject.SetActive(false);
-        videoPlayer.Stop();
-        video.gameObject.SetActive(false);
-        audioSource.Stop();
+        VignetteController vignette = VignettesManager.Instance.SelectedVignette;
+        if (!vignette) { return; }
+
+        vignetteDisplay = vignette.display;
+
+        vignetteDisplay.Display(false, vignette.vignetteData.transitionSpeed);
+
+        switch (vignette.vignetteData.mode)
+        {
+            case DataType.None:
+                break;
+            case DataType.Image:
+                DisplayImage(vignette.sprite);
+                break;
+            case DataType.Video:
+                DisplayVideo(vignette.vignetteData.dataPath);
+                break;
+            case DataType.Audio:
+                PlayAudio(vignette.audioClip);
+                break;
+            case DataType.NDI:
+                break;
+        }
+
+        vignetteDisplay.Display(true, vignette.vignetteData.transitionSpeed);
     }
 
-    public void DisplayImage(Sprite sprite)
+    private void DisplayImage(Sprite sprite)
     {
-        ClearPresentation();
-        image.gameObject.SetActive(true);
-        image.sprite = sprite;
+        vignetteDisplay.image.gameObject.SetActive(true);
+        vignetteDisplay.image.sprite = sprite;
     }
 
-    public void DisplayVideo(string videoPath)
+    //TODO: Move that on the VignetteDisplayController
+    private void DisplayVideo(string videoPath)
     {
-        ClearPresentation();
-        video.gameObject.SetActive(true);
-        videoPlayer.url = videoPath;
-        videoPlayer.playOnAwake = false;
-        videoPlayer.prepareCompleted += OnPrepareCompleted;
-        videoPlayer.Prepare();
+        //vignetteDisplay.videoPlayer.url = videoPath;
+        vignetteDisplay.videoPlayer.playOnAwake = false;
+        vignetteDisplay.videoPlayer.prepareCompleted += OnPrepareCompleted;
+        vignetteDisplay.videoPlayer.Prepare();
     }
 
+    //TODO: Move that on the VignetteDisplayController
     private void OnPrepareCompleted(VideoPlayer vp)
     {
-        videoPlayer.Play();
+        vignetteDisplay.videoPlayer.Play();
+        vignetteDisplay.Display(true, -1);
     }
 
-    public void PlayAudio(AudioClip audioClip)
+    private void PlayAudio(AudioClip audioClip)
     {
-        ClearPresentation();
         audioSource.clip = audioClip;
         audioSource.Play();
     }

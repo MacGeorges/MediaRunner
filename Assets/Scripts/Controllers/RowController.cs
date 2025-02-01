@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RowController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform vignettesRoot;
+    [field: SerializeField]
+    public Transform vignettesRoot
+    {  get; private set; }
 }

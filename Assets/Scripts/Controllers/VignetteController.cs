@@ -28,7 +28,7 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
         vignetteData = newVignetteData;
         display = newDisplay;
 
-        display.Initialize(vignetteData, renderTexture);
+        display.Initialize(this, renderTexture);
 
         DisplayResource();
     }
@@ -99,13 +99,13 @@ public class VignetteController : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         if (VignettesManager.Instance.SelectedVignette == this)
         {
-            display.Display(false, vignetteData.transitionSpeed);
             VignettesManager.Instance.SetSelectedVignette(null);
+            display.Display(false, vignetteData.transitionSpeed);
         }
         else
         {
             VignettesManager.Instance.SetSelectedVignette(this);
+            display.DisplayMedia();
         }
-        PresentationManager.Instance.DisplaySelectedVignette();
     }
 }

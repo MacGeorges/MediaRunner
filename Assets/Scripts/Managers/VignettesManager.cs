@@ -40,10 +40,14 @@ public class VignettesManager : MonoBehaviour
         foreach(Row row in layout.Rows)
         {
             RowController newRow = Instantiate(rowPrefab, rowRoot);
+
+            Transform displayParent = vignettesDisplayRoot;
+
             foreach(VignetteData vignette in row.vignettes)
             {
                 VignetteController newVignette = Instantiate(vignettePrefab, newRow.vignettesRoot);
-                VignetteDisplayController newVignetteDisplay = Instantiate(vignetteDisplayPrefab, vignettesDisplayRoot);
+                VignetteDisplayController newVignetteDisplay = Instantiate(vignetteDisplayPrefab, displayParent);
+                displayParent = newVignetteDisplay.transform;
 
                 RenderTexture renderTexture;
                 renderTexture = new RenderTexture(1920, 1080, 32, RenderTextureFormat.ARGB32);

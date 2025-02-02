@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3454740702940009781}
   - component: {fileID: 501346900406909410}
   - component: {fileID: 3585818771966550989}
-  - component: {fileID: 1229336132519804570}
   - component: {fileID: 8776731420851636670}
   - component: {fileID: 1791474084928811271}
   - component: {fileID: 3289776639820570720}
@@ -40,7 +39,7 @@ RectTransform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -64,25 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7212b94e2f7170c438360bb1ccc57906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1791474084928811271}
-  aspectRatioFitter: {fileID: 6340862137857155053}
-  mask: {fileID: 3713789634646507466}
-  video: {fileID: 0}
-  <videoPlayer>k__BackingField: {fileID: 3289776639820570720}
-  ndiReceiver: {fileID: 922915180160314597}
   vignetteRef: {fileID: 0}
---- !u!225 &1229336132519804570
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4773467474415888880}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!82 &8776731420851636670
 AudioSource:
   m_ObjectHideFlags: 0
@@ -273,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 3
-  m_AspectRatio: 1.8
+  m_AspectRatio: 11.73
 --- !u!114 &3713789634646507466
 MonoBehaviour:
   m_ObjectHideFlags: 0

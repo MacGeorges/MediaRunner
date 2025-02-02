@@ -10,7 +10,6 @@ using UnityEngine.Video;
 [RequireComponent(typeof(Mask))]
 [RequireComponent(typeof(VideoPlayer))]
 [RequireComponent(typeof(NdiReceiver))]
-[RequireComponent(typeof(CanvasGroup))]
 [RequireComponent(typeof(AudioSource))]
 public class VignetteDisplayController : MonoBehaviour
 {
@@ -19,7 +18,6 @@ public class VignetteDisplayController : MonoBehaviour
     private Mask mask;
     public VideoPlayer videoPlayer { get; private set; }
     private NdiReceiver ndiReceiver;
-    private CanvasGroup canvasGroup;
     private AudioSource audioSource;
 
     [SerializeField] //Display for debug
@@ -36,16 +34,18 @@ public class VignetteDisplayController : MonoBehaviour
         mask = GetComponent<Mask>();
         videoPlayer = GetComponent<VideoPlayer>();
         ndiReceiver = GetComponent<NdiReceiver>();
-        canvasGroup = GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         displayHideEvaluateTime = Mathf.Clamp01(targetDisplayHide ? displayHideEvaluateTime += (Time.deltaTime * alphaSpeed) : displayHideEvaluateTime -= (Time.deltaTime * alphaSpeed));
-        canvasGroup.alpha = vignetteRef.vignetteData.transitionCurve.Evaluate(displayHideEvaluateTime);
+        
+        Color updatedColor = image.color;
+        updatedColor.a = vignetteRef.vignetteData.transitionCurve.Evaluate(displayHideEvaluateTime);
+        image.color = updatedColor;
 
-        videoPlayer.SetDirectAudioVolume(0, canvasGroup.alpha);
+        videoPlayer.SetDirectAudioVolume(0, image.color.a);
     }
 
     public void Initialize(VignetteController vignette, RenderTexture renderTexture)

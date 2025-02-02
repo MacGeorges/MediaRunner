@@ -4008,7 +4008,7 @@ MonoBehaviour:
   position: {fileID: 1093326570}
   rotation: {fileID: 1093326569}
   scale: {fileID: 1093326568}
-  imageTypeDropDown: {fileID: 0}
+  imageTypeDropDown: {fileID: 992870947}
 --- !u!114 &1093326568 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4846622014871035987, guid: 89a2a89549facda49a23d3a81d2310c6, type: 3}

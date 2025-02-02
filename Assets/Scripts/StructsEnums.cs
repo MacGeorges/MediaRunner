@@ -15,6 +15,7 @@ public struct VignetteData
 {
     public DataType mode;
     public string dataPath;
+    public int imageMode;
     public float transitionSpeed;
     public AnimationCurve transitionCurve;
 }

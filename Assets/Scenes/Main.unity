@@ -6981,7 +6981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63d345e7c86e56418676fb834e0ad0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vignetteDisplayPrefab: {fileID: 3585818771966550989, guid: 3132d9081545fa948aa9748cd06794ac, type: 3}
+  vignetteDisplayPrefab: {fileID: 3585818771966550989, guid: ae4ce0cb43b940e49b61ad07db84f522, type: 3}
   vignettesDisplayRoot: {fileID: 272949024}
   vignettePrefab: {fileID: 3435894045828560941, guid: 4c6e2c7425cc806438408a43039c5547, type: 3}
   rowPrefab: {fileID: 1023558523063656939, guid: e2f8fbd6f09a99e4cbeb3b3f9c4504fd, type: 3}

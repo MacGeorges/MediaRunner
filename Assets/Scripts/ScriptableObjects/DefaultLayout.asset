@@ -43,7 +43,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - mode: 2
       dataPath: C:\Users\MacGeorges\Videos\Titanic.mp4
-      transitionSpeed: 0.01
+      transitionSpeed: 0.25
       transitionCurve:
         serializedVersion: 2
         m_Curve:

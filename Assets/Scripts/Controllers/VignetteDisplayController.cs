@@ -5,25 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+[RequireComponent(typeof(RawImage))]
+[RequireComponent(typeof(AspectRatioFitter))]
+[RequireComponent(typeof(Mask))]
+[RequireComponent(typeof(VideoPlayer))]
+[RequireComponent(typeof(NdiReceiver))]
 [RequireComponent(typeof(CanvasGroup))]
 [RequireComponent(typeof(AudioSource))]
 public class VignetteDisplayController : MonoBehaviour
 {
-    [SerializeField]
     private RawImage image;
-    [SerializeField]
     private AspectRatioFitter aspectRatioFitter;
-    [SerializeField]
     private Mask mask;
-    [SerializeField]
-    private RawImage video;
-
-    [field: SerializeField]
     public VideoPlayer videoPlayer { get; private set; }
-
-    [SerializeField]
     private NdiReceiver ndiReceiver;
-
     private CanvasGroup canvasGroup;
     private AudioSource audioSource;
 
@@ -36,6 +31,11 @@ public class VignetteDisplayController : MonoBehaviour
 
     private void Awake()
     {
+        image = GetComponent<RawImage>();
+        aspectRatioFitter = GetComponent<AspectRatioFitter>();
+        mask = GetComponent<Mask>();
+        videoPlayer = GetComponent<VideoPlayer>();
+        ndiReceiver = GetComponent<NdiReceiver>();
         canvasGroup = GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -51,25 +51,23 @@ public class VignetteDisplayController : MonoBehaviour
     public void Initialize(VignetteController vignette, RenderTexture renderTexture)
     {
         vignetteRef = vignette;
-        image.gameObject.SetActive(false);
-        video.gameObject.SetActive(false);
 
         switch (vignette.vignetteData.mode)
         {
             case DataType.None:
                 break;
             case DataType.Audio:
+                image.enabled = false;
                 audioSource.clip = vignette.audioClip;
                 audioSource.playOnAwake = false;
                 break;
             case DataType.Image:
-                image.gameObject.SetActive(true);
+                image.enabled = true;
                 image.texture = vignette.sprite.texture;
                 break;
             case DataType.Video:
             case DataType.NDI:
-                video.gameObject.SetActive(true);
-                video.texture = renderTexture;
+                image.texture = renderTexture;
 
                 videoPlayer.url = vignette.vignetteData.dataPath;
                 videoPlayer.targetTexture = renderTexture;

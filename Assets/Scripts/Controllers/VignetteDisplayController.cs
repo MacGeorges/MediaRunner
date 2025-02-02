@@ -26,8 +26,9 @@ public class VignetteDisplayController : MonoBehaviour
     [SerializeField] //Display for debug
     private VignetteController vignetteRef;
 
-    private float targetAlpha;
+    private bool targetDisplayHide;
     private float alphaSpeed;
+    private float displayHideEvaluateTime;
 
     private void Awake()
     {
@@ -37,12 +38,8 @@ public class VignetteDisplayController : MonoBehaviour
 
     private void Update()
     {
-
-        //TODO: Use a curve for that
-        if(Mathf.Abs(targetAlpha - canvasGroup.alpha) > 0)
-        {
-            canvasGroup.alpha = Mathf.Clamp01(Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.deltaTime * (alphaSpeed / Mathf.Abs(targetAlpha - canvasGroup.alpha))));
-        }
+        displayHideEvaluateTime = Mathf.Clamp01(targetDisplayHide ? displayHideEvaluateTime += (Time.deltaTime * alphaSpeed) : displayHideEvaluateTime -= (Time.deltaTime * alphaSpeed));
+        canvasGroup.alpha = vignetteRef.vignetteData.transitionCurve.Evaluate(displayHideEvaluateTime);
 
         videoPlayer.SetDirectAudioVolume(0, canvasGroup.alpha);
     }
@@ -83,7 +80,7 @@ public class VignetteDisplayController : MonoBehaviour
     public void Display(bool display, float speed)
     {
         alphaSpeed = speed;
-        targetAlpha = display ? 1 : 0;
+        targetDisplayHide = display;
     }
 
     public void DisplayMedia()

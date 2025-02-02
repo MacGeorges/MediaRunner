@@ -16,6 +16,7 @@ public struct VignetteData
     public DataType mode;
     public string dataPath;
     public float transitionSpeed;
+    public AnimationCurve transitionCurve;
 }
 
 public struct DropInfo

@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7850073958348105719}
   - component: {fileID: 3435894045828560941}
   m_Layer: 5
-  m_Name: Vignette
+  m_Name: VignetteController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,6 +271,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 555636098716354789}
+  <display>k__BackingField: {fileID: 0}
+  <vignetteData>k__BackingField:
+    mode: 0
+    dataPath: 
+    transitionSpeed: 0
+    transitionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1 &6200521699640234419
 GameObject:
   m_ObjectHideFlags: 0

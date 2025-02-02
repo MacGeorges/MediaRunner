@@ -9,16 +9,20 @@ using UnityEngine.Video;
 [RequireComponent(typeof(AudioSource))]
 public class VignetteDisplayController : MonoBehaviour
 {
-    [field: SerializeField]
-    public Image image { get; private set; }
-    [field: SerializeField]
-    public RawImage video { get; private set; }
+    [SerializeField]
+    private RawImage image;
+    [SerializeField]
+    private AspectRatioFitter aspectRatioFitter;
+    [SerializeField]
+    private Mask mask;
+    [SerializeField]
+    private RawImage video;
 
     [field: SerializeField]
     public VideoPlayer videoPlayer { get; private set; }
 
-    [field: SerializeField]
-    public NdiReceiver ndiReceiver { get; private set; }
+    [SerializeField]
+    private NdiReceiver ndiReceiver;
 
     private CanvasGroup canvasGroup;
     private AudioSource audioSource;
@@ -60,7 +64,7 @@ public class VignetteDisplayController : MonoBehaviour
                 break;
             case DataType.Image:
                 image.gameObject.SetActive(true);
-                image.sprite = vignette.sprite;
+                image.texture = vignette.sprite.texture;
                 break;
             case DataType.Video:
             case DataType.NDI:
@@ -123,8 +127,13 @@ public class VignetteDisplayController : MonoBehaviour
 
     private void DisplayImage(Sprite sprite)
     {
-        image.gameObject.SetActive(true);
-        image.sprite = sprite;
+        image.texture = sprite.texture;
+        aspectRatioFitter.aspectRatio = ((float)sprite.texture.width / (float)sprite.texture.height);
+    }
+
+    public void SetImageType(int type)
+    {
+        mask.enabled = (type == 1);
     }
 
     private void PlayAudio(AudioClip audioClip)

@@ -23,6 +23,7 @@ public class VignetteDisplayController : MonoBehaviour
     private CanvasGroup canvasGroup;
     private AudioSource audioSource;
 
+    [SerializeField] //Display for debug
     private VignetteController vignetteRef;
 
     private float targetAlpha;
@@ -36,7 +37,12 @@ public class VignetteDisplayController : MonoBehaviour
 
     private void Update()
     {
-        canvasGroup.alpha = Mathf.Clamp01(Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.deltaTime * alphaSpeed));
+
+        //TODO: Use a curve for that
+        if(Mathf.Abs(targetAlpha - canvasGroup.alpha) > 0)
+        {
+            canvasGroup.alpha = Mathf.Clamp01(Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.deltaTime * (alphaSpeed / Mathf.Abs(targetAlpha - canvasGroup.alpha))));
+        }
 
         videoPlayer.SetDirectAudioVolume(0, canvasGroup.alpha);
     }

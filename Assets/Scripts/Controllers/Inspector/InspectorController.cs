@@ -49,9 +49,11 @@ public class InspectorController : MonoBehaviour
                 break;
             case DataType.Image:
                 imagePanel.gameObject.SetActive(true);
+                imagePanel.Init(vignette);
                 break;
             case DataType.Video:
                 videoPanel.gameObject.SetActive(true);
+                videoPanel.Init(vignette);
                 break;
             case DataType.Audio:
                 audioPanel.gameObject.SetActive(true);

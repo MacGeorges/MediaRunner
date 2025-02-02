@@ -20,22 +20,29 @@ public class VideoInspectorController : VisualElementInspectorPanel
     [SerializeField]
     private Image stopIcon;
 
-    private bool isPlaying;
-
-    public void Init()
+    private void Start()
     {
-        targetTransform = VignettesManager.Instance.SelectedVignette.display.transform;
-        base.Init();
-
         looping.onValueChanged.AddListener(OnLoopingChanged);
         progress.onValueChanged.AddListener(OnProgressChanged);
         playSpeed.onValueChanged.AddListener(OnPlaySpeedChanged);
     }
 
+    public void Init(VignetteController vignette)
+    {
+        targetTransform = vignette.display.transform;
+        base.Init();
+    }
+
     private void Update()
     {
-        progress.maxValue = (float)VignettesManager.Instance.SelectedVignette?.display.videoPlayer.length;
-        progress.value = (float)VignettesManager.Instance.SelectedVignette?.display.videoPlayer.time;
+        if (VignettesManager.Instance.SelectedVignette)
+        {
+            progress.maxValue = (float)VignettesManager.Instance.SelectedVignette.display.videoPlayer.length;
+            progress.value = (float)VignettesManager.Instance.SelectedVignette.display.videoPlayer.time;
+
+            playPauseIcon.sprite = VignettesManager.Instance.SelectedVignette.display.videoPlayer.isPlaying ?
+                                ThemeManager.Instance.GetTheme().Pause : ThemeManager.Instance.GetTheme().Play;
+        }
     }
 
     private void OnProgressChanged(float newTime)
@@ -56,17 +63,15 @@ public class VideoInspectorController : VisualElementInspectorPanel
 
     public void PlayPauseButtonPressed()
     {
-        if(isPlaying)
+        if(VignettesManager.Instance.SelectedVignette.display.videoPlayer.isPlaying)
         {
             VignettesManager.Instance.SelectedVignette.display.videoPlayer.Pause();
             playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Play;
-            isPlaying = false;
         }
         else
         {
             VignettesManager.Instance.SelectedVignette.display.videoPlayer.Play();
             playPauseIcon.sprite = ThemeManager.Instance.GetTheme().Pause;
-            isPlaying = true;
         }
     }
 

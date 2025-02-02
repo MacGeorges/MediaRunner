@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CanvasGroup))]
 [RequireComponent(typeof(AudioSource))]
 public class VignetteDisplayController : MonoBehaviour
@@ -22,16 +21,24 @@ public class VignetteDisplayController : MonoBehaviour
     public NdiReceiver ndiReceiver { get; private set; }
 
     private CanvasGroup canvasGroup;
-    private Animator animator;
     private AudioSource audioSource;
 
     private VignetteController vignetteRef;
 
+    private float targetAlpha;
+    private float alphaSpeed;
+
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        canvasGroup.alpha = Mathf.Clamp01(Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.deltaTime * alphaSpeed));
+
+        videoPlayer.SetDirectAudioVolume(0, canvasGroup.alpha);
     }
 
     public void Initialize(VignetteController vignette, RenderTexture renderTexture)
@@ -39,8 +46,6 @@ public class VignetteDisplayController : MonoBehaviour
         vignetteRef = vignette;
         image.gameObject.SetActive(false);
         video.gameObject.SetActive(false);
-
-        animator.SetFloat("Speed", vignette.vignetteData.transitionSpeed);
 
         switch (vignette.vignetteData.mode)
         {
@@ -69,18 +74,10 @@ public class VignetteDisplayController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (canvasGroup.alpha > 0)
-        {
-            videoPlayer.SetDirectAudioVolume(0, canvasGroup.alpha);
-        }
-    }
-
     public void Display(bool display, float speed)
     {
-        animator.SetFloat("Speed", speed);
-        animator.SetBool("Display", display);
+        alphaSpeed = speed;
+        targetAlpha = display ? 1 : 0;
     }
 
     public void DisplayMedia()

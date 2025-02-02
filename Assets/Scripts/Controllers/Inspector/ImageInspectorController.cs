@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ImageInspectorController : VisualElementInspectorPanel
 {
-    private void Start()
+    public void Init(VignetteController vignette)
     { 
-        targetTransform = VignettesManager.Instance.SelectedVignette.display.transform;
+        targetTransform = vignette.display.transform;
         base.Init();
     }
 }
